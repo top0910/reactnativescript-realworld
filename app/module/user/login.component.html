@@ -1,0 +1,44 @@
+<FlexboxLayout class="page">
+    <StackLayout class="form">
+        <Image class="logo" src="res://logo_small" horizontalAlignment="center"></Image>
+
+        <StackLayout class="input-field m-t-10">
+            <TextField class="input" hint="{{ 'user.form.email' | L }}" keyboardType="email" autocorrect="false" autocapitalizationType="none"
+                [(ngModel)]="user.email" returnKeyType="next" (returnPress)="username ? username.nativeElement.focus(): 'null'"
+                [editable]="!isLoading"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+        <StackLayout *ngIf="!isLoggingIn" class="input-field">
+            <TextField #username class="input" hint="{{ 'user.form.username' | L }}" autocorrect="false" autocapitalizationType="none"
+                [(ngModel)]="user.username" returnKeyType="next" (returnPress)="password.nativeElement.focus()" [editable]="!isLoading"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+        <StackLayout class="input-field">
+            <TextField #password class="input" hint="{{ 'user.form.password' | L }}" secure="true" [returnKeyType]="isLoggingIn ? 'done' : 'next'"
+                (returnPress)="confirmPassword ? confirmPassword.nativeElement.focus() : 'null'" [editable]="!isLoading"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+        <StackLayout *ngIf="!isLoggingIn" class="input-field">
+            <TextField #confirmPassword class="input" hint="{{ 'user.form.passwordConfirm' | L }}" secure="true" returnKeyType="done"
+                [editable]="!isLoading"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+        <Button text="{{ (isLoggingIn ? 'user.login' : 'user.register') | L }}" (tap)="onSubmit()" class="btn btn-primary m-t-20"
+            [isEnabled]="!isLoading"></Button>
+
+        <ActivityIndicator [busy]="isLoading" horizontalAlignment="center" verticalAlignment="center" class="activity-indicator"></ActivityIndicator>
+    </StackLayout>
+
+    <Label class="login-label sign-up-label" (tap)="isLoggingIn = !isLoggingIn">
+        <FormattedString>
+            <Span text="{{ (isLoggingIn ? 'user.form.needAccount' : 'user.form.backToLogin') | L }}"> </Span>
+            <Span text=" {{ (isLoggingIn ? 'user.register' : '') | L }}" class="bold"></Span>
+        </FormattedString>
+    </Label>
+
+    <Label [text]="'fa-home' | fonticon" class="fa m-5" (tap)="onBack()"></Label>
+</FlexboxLayout>

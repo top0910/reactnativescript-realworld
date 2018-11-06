@@ -1,0 +1,38 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/bower_components
+/platforms
+/hooks
+/lib
+/debugger
+/dist
+/report
+
+/app/**/*.map
+/app/**/*.js
+/app/**/*.css
+
+**/*.log
+/tags
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+*.launch
+.settings/
+.vscode/
+.cloud/
+
+# Tests
+/e2e/reports
+/e2e/**/*.js
+
+#
+*.bat
+
+#System Files
+.DS_Store
+Thumbs.db
